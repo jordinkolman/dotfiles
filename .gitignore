@@ -1,0 +1,13 @@
+# Local config files containing secrets
+*_local
+*.local
+.env
+.env.*
+
+
+# SSH and Keys
+*.pem
+*.key
+
+id_rsa*
+id_ed25519*

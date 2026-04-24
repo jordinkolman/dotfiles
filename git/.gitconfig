@@ -1,0 +1,10 @@
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+	ff = only
+[core]
+	filemode = false
+  autocrlf = input
+[include]
+  path = ~/.gitconfig.local
