@@ -126,6 +126,9 @@ fi
 PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 
+# Add scripts directory to PATH for script executions
+export PATH="$HOME/workspace/scripts:$PATH"
+
 # Set variable for Docker Host
 export DOCKER_HOST="unix:///var/run/docker.sock"
 
@@ -158,4 +161,5 @@ printf '\e[?25h\e[5 q'
 if [ -t 1 ]; then 
   printf '\033[?7h'
 fi
-~/workspace/scripts/notion_daily.sh 
+
+
