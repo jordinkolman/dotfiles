@@ -162,4 +162,4 @@ if [ -t 1 ]; then
   printf '\033[?7h'
 fi
 
-
+notion_daily.sh
