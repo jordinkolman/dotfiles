@@ -158,3 +158,4 @@ printf '\e[?25h\e[5 q'
 if [ -t 1 ]; then 
   printf '\033[?7h'
 fi
+~/workspace/scripts/notion_daily.sh 
