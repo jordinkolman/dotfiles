@@ -162,4 +162,7 @@ if [ -t 1 ]; then
   printf '\033[?7h'
 fi
 
-notion_daily.sh
+# Initialize interactive tmux layouts
+if [ -f "$HOME/workspace/scripts/tmux_startup.sh" ]; then
+    source "$HOME/workspace/scripts/tmux_startup.sh"
+fi
