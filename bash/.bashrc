@@ -162,7 +162,10 @@ if [ -t 1 ]; then
   printf '\033[?7h'
 fi
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Initialize interactive tmux layouts
-if [ -f "$HOME/workspace/scripts/tmux_startup.sh" ]; then
-    source "$HOME/workspace/scripts/tmux_startup.sh"
+if [ -f "$HOME/workspace/yggdrasil/tmux_startup.sh" ]; then
+    source "$HOME/workspace/yggdrasil/tmux_startup.sh"
 fi
+
