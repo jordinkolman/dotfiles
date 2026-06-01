@@ -164,8 +164,11 @@ fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Initialize interactive tmux layouts
-if [ -f "$HOME/workspace/yggdrasil/tmux_startup.sh" ]; then
-    source "$HOME/workspace/yggdrasil/tmux_startup.sh"
+# Initialize Yggdrasil shell wrapper
+eval "$(yggdrasil init bash)"
+
+# Launch Yggdrasil on startup if not already inside a tmux session
+if [ -z "$TMUX" ]; then
+  ygg
 fi
 
