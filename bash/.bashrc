@@ -1,3 +1,4 @@
+export PATH="/home/jordinkolman/.nvm/versions/node/v22.21.0/bin:$PATH"
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -164,11 +165,18 @@ fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Initialize Yggdrasil shell wrapper
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+export VISUAL="lvim"
+export EDITOR="$VISUAL"
+
+# ---------------------------------------------------------
+# Yggdrasil - Tmux Session Manager
+# ---------------------------------------------------------
 eval "$(yggdrasil init bash)"
-
-# Launch Yggdrasil on startup if not already inside a tmux session
 if [ -z "$TMUX" ]; then
-  ygg
+    ygg
 fi
-
