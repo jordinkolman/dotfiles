@@ -1,4 +1,3 @@
-export PATH="/home/jordinkolman/.nvm/versions/node/v22.21.0/bin:$PATH"
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -142,20 +141,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export DOCKER_MCP_IN_CONTAINER=1
 
-# Temporarily center output based on screen size for Neofetch display
-TERM_WIDTH=$(tput cols)
-TERM_HEIGHT=$(tput lines)
-NF_WIDTH=100
-NF_HEIGHT=18
-PAD_Y=$(( (TERM_HEIGHT - NF_HEIGHT) / 2 ))
-PAD_X=$(( (TERM_WIDTH - (NF_WIDTH)) / 2 ))
-printf "%${PAD_Y}s" | tr ' ' '\n'
-neofetch --gap 3 | sed 's/\x1b\[9999999D//g' | while IFS= read -r line; do
-   printf "%${PAD_X}s%s\n" "" "$line"
-done
-sleep 1
-clear
-printf '\e[?25h\e[5 q'
 
 # Fixes an issue with Tmux + Alacritty on WSL where Text truncates instead of wrapping when
 # It reaches the end of the terminal width
