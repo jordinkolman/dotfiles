@@ -1,0 +1,56 @@
+settings:
+    editor: nvim
+sessions:
+    - name: '[New] Terminal Session'
+      description: 1 Large + 2 Vertically Stacked Smaller Terminals
+      windows:
+        - name: main
+          panes:
+            - split: ""
+              size: ""
+              command: ""
+            - split: vertical
+              size: 33%
+              command: ""
+            - split: horizontal
+              size: 50%
+              command: ""
+    - name: '[New] Coding Session'
+      description: NeoVim + AI Assistant + Terminal
+      windows:
+        - name: main
+          panes:
+            - split: ""
+              size: ""
+              command: '{{editor}} .'
+            - split: vertical
+              size: 30%
+              command: "clear && export GEMINI_API_KEY=$(cat ~/lockbox/.gemini_key) && aider --model gemini/gemini-2.5-flash"
+            - split: horizontal
+              size: 25%
+              command: ""
+    - name: '[New] Live Development Session'             
+      description: "Main Window: NeoVim + AI Assistant + Terminal. Logs Window: 1 Large + 2 Vertically Stacked Smaller Terminals"
+      windows:
+        - name: main
+          panes:
+            - split: ""
+              size: ""
+              command: '{{editor}} .'
+            - split: vertical
+              size: 30%
+              command: "clear && export GEMINI_API_KEY=$(cat ~/lockbox/.gemini_key) && aider --model gemini/gemini-2.5-flash"
+            - split: horizontal
+              size: 25%
+              command: ""
+        - name: logs
+          panes: 
+            - split: ""
+              size: ""
+              command: ""
+            - split: vertical
+              size: 30%
+              command: ""
+            - split: horizontal
+              size: 50%
+              command: ""
