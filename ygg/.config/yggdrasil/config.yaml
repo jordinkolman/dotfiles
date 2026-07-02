@@ -39,7 +39,7 @@ sessions:
               command: '{{editor}} .'
             - split: vertical
               size: 30%
-              command: "clear && export GEMINI_API_KEY=$(cat ~/lockbox/.gemini_key) && aider --model gemini/gemini-2.5-flash"
+              command: "clear && export GEMINI_API_KEY=$(cat ~/lockbox/.gemini_key_aider) && aider --model gemini/gemini-3.5-flash"
             - split: horizontal
               size: 25%
               command: ""
