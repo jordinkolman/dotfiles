@@ -19,7 +19,7 @@ opt.timeoutlen = 300
 
 local function get_secret_key()
 	local home = os.getenv("HOME")
-	local file = io.open(home .. "/lockbox/.gemini_key", "r")
+	local file = io.open(home .. "/lockbox/.gemini_key_neovim", "r")
 	if not file then return  "" end
 	local key = file:read("*all"):gsub("%s+", "")
 	file:close()
@@ -57,6 +57,23 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- Plugin Definitions
+vim.opt.clipboard = "unnamedplus"
+
+if vim.fn.has("wsl") == 1 then
+  vim.g.clipboard = {
+    name = 'osc52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+      ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+    },
+  }
+end
+
+
 require("lazy").setup({
 	{
 		"EdenEast/nightfox.nvim",
@@ -149,6 +166,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
+            "milanglacier/minuet-ai.nvim",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -174,6 +192,28 @@ require("lazy").setup({
 	},
 })
 
+require("minuet").setup({
+    provider = "gemini",
+    provider_options = {
+        gemini = {
+            model = "gemini-3.1-flash-lite",
+            stream = true,
+            optional = {
+                generationConfig = { maxOutputTokens = 256 },
+            },
+        },
+    },
+    virtualtext = {
+        auto_trigger_ft = {},
+        keymap = {
+            accept = "<A-y>",
+            dismiss = "<A-x>",
+        },
+    },
+})
+
 -- Keymappings
 vim.keymap.set("n", "H", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer Tab" })
 vim.keymap.set("n", "L", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer Tab" })
+
+ 
