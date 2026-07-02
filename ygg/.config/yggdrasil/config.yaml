@@ -30,7 +30,7 @@ sessions:
               size: 25%
               command: ""
     - name: '[New] Live Development Session'             
-      description: "Main Window: NeoVim + AI Assistant + Terminal. Logs Window: 1 Large + 2 Vertically Stacked Smaller Terminals"
+      description: "Main Window: NeoVim + AI Assistant. Logs Window: 1 Large + 2 Vertically Stacked Smaller Terminals"
       windows:
         - name: main
           panes:
@@ -38,11 +38,8 @@ sessions:
               size: ""
               command: '{{editor}} .'
             - split: vertical
-              size: 30%
+              size: 20%
               command: "clear && export GEMINI_API_KEY=$(cat ~/lockbox/.gemini_key_aider) && aider --model gemini/gemini-3.5-flash"
-            - split: horizontal
-              size: 25%
-              command: ""
         - name: logs
           panes: 
             - split: ""
