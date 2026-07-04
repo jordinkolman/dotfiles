@@ -57,23 +57,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- Plugin Definitions
-vim.opt.clipboard = "unnamedplus"
-
-if vim.fn.has("wsl") == 1 then
-  vim.g.clipboard = {
-    name = 'osc52',
-    copy = {
-      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-    },
-    paste = {
-      ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-      ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-    },
-  }
-end
-
-
 require("lazy").setup({
 	{
 		"EdenEast/nightfox.nvim",
