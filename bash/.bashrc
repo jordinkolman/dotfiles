@@ -117,7 +117,7 @@ uvi() {
         if [[ ! "$arg" == -* ]]; then 
             target_dir="$arg" 
             break
-        file
+        fi
     done 
 
     # Inject .envrc into target directory for direnv 
