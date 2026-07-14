@@ -72,22 +72,24 @@ xterm*|rxvt*)
     ;;
 esac
 
-# alias ls to lsd 
-alias ls='lsd'
-
-# alias tree to lsd -- tree
-alias tree='ls --tree'
-
+# ---------------------------------------------------------
+# Aliases
+# ---------------------------------------------------------
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 # alias grep to ripgrep
 alias grep='rg'
 
 # alias cat to bat
 alias cat='bat'
 
-# more ls aliases
+# ls -> lsd aliases
+alias ls='lsd'
 alias ll='lsd -alF'
 alias la='ls -A'
 alias lt='ls --tree'
+alias tree='ls --tree'
 alias l='ls -CF'
 
 # cd alias for zoxide
@@ -97,19 +99,35 @@ alias cd='z'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# ---------------------------------------------------------
+# Custom Functions
+# ---------------------------------------------------------
 # define alias function for simeltaneous directory creation and cd 
 mkd() {
   mkdir -p "$1" && cd "$1" 
 } 
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+uvi() {
+    # Run standard uv init with passed args
+    uv init "$@"
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+    # Determine target directory 
+    local target_dir="."
+    for arg in "$@"; do 
+        if [[ ! "$arg" == -* ]]; then 
+            target_dir="$arg" 
+            break
+        file
+    done 
+
+    # Inject .envrc into target directory for direnv 
+    cat << 'EOF' > "${target_dir}/.envrc"
+test -d .venv || uv venv 
+source .venv/bin/activate
+EOF
+
+    (cd "$target_dir" && direnv allow)
+}
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -132,9 +150,10 @@ export PATH="$HOME/workspace/scripts:$PATH"
 # Set variable for Docker Host
 export DOCKER_HOST="unix:///var/run/docker.sock"
 
-# initiate Zoxide and Startship
+# initiate CLI Tools
 eval "$(zoxide init bash)"
 eval "$(starship init bash)"
+eval "$(direnv hook bash)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -155,7 +174,7 @@ case $- in
       *) return;;
 esac
 
-export VISUAL="lvim"
+export VISUAL="nvim"
 export EDITOR="$VISUAL"
 
 # ---------------------------------------------------------
