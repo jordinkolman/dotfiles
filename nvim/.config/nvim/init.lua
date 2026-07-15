@@ -19,13 +19,13 @@ opt.timeoutlen = 300
 
 local function get_secret_key()
 	local home = os.getenv("HOME")
-	local file = io.open(home .. "/lockbox/.gemini_key_neovim", "r")
+	local file = io.open(home .. "/lockbox/.deepseek_api_key", "r")
 	if not file then return  "" end
 	local key = file:read("*all"):gsub("%s+", "")
 	file:close()
 	return key
 end
-vim.env.GEMINI_API_KEY = get_secret_key()
+vim.env.DEEPSEEK_API_KEY = get_secret_key()
 
 -- Bootstrap Lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -174,13 +174,12 @@ require("lazy").setup({
 				mapping = cmp.mapping.preset.insert({
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<A-y>"] = cmp.mapping(function()
-						require("minuet").make_cmp_map()()
-					end, { "i" }),
+					["<A-y>"] = require("minuet").make_cmp_map(),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "path" },
+                    { name = "minuet" },
 					{ name = "buffer" },
 				}),
 				performance = {
@@ -192,13 +191,16 @@ require("lazy").setup({
 })
 
 require("minuet").setup({
-    provider = "gemini",
+    provider = "openai_fim_compatible",
     provider_options = {
-        gemini = {
-            model = "gemini-3.1-flash-lite",
-            stream = true,
+        openai_fim_compatible = {
+            end_point = 'https://api.deepseek.com/beta/completions',
+            api_key = get_secret_key() or os.getenv("DEEPSEEK_API_KEY") OR "",
+            name = "deepseek",
+            model = "deepseek-coder"
             optional = {
-                generationConfig = { maxOutputTokens = 256 },
+                max_tokens = 256,
+                top_p = 0.9,
             },
         },
     },
