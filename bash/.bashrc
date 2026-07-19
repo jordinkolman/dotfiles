@@ -79,6 +79,7 @@ if [ -f "$HOME/lockbox/.deepseek_api_key" ]; then
     export DEEPSEEK_API_KEY=$(cat "$HOME/lockbox/.deepseek_api_key")
 fi
 
+export DIRENV_LOG_FORMAT=""
 # ---------------------------------------------------------
 # Aliases
 # ---------------------------------------------------------
