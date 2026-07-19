@@ -179,7 +179,7 @@ require("lazy").setup({
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "path" },
-                    { name = "minuet" },
+                    			{ name = "minuet" },
 					{ name = "buffer" },
 				}),
 				performance = {
@@ -195,9 +195,9 @@ require("minuet").setup({
     provider_options = {
         openai_fim_compatible = {
             end_point = 'https://api.deepseek.com/beta/completions',
-            api_key = get_secret_key() or os.getenv("DEEPSEEK_API_KEY") OR "",
+            api_key = "DEEPSEEK_API_KEY",
             name = "deepseek",
-            model = "deepseek-coder"
+            model = "deepseek-coder",
             optional = {
                 max_tokens = 256,
                 top_p = 0.9,
