@@ -25,7 +25,7 @@ sessions:
               command: '{{editor}} .'
             - split: vertical
               size: 30%
-              command: "clear && export GEMINI_API_KEY=$(cat ~/lockbox/.gemini_key_aider) && aider --model deepseek/deepseek-chat"
+              command: "clear && export && export DEEPSEEK_API_KEY=$(cat ~/lockbox/.deepseek_api_key) && aider --model deepseek/deepseek-chat"
             - split: horizontal
               size: 25%
               command: ""
@@ -39,7 +39,7 @@ sessions:
               command: '{{editor}} .'
             - split: vertical
               size: 20%
-              command: "clear && export GEMINI_API_KEY=$(cat ~/lockbox/.gemini_key_aider) && aider --model gemini/gemini-3.5-flash"
+              command: "clear && export DEEPSEEK_API_KEY=$(cat ~/lockbox/.deepseek_api_key) && aider --model deepseek/deepseek-chat"
         - name: logs
           panes: 
             - split: ""
